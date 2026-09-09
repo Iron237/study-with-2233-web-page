@@ -1,0 +1,24 @@
+/* Website focus mode keeps the clock and the two deliberate escape controls usable. */
+.focus-active #utilityDock{visibility:visible!important;z-index:101}
+.focus-active #utilityDock #settingsToggle,.focus-active #settings{visibility:visible!important;pointer-events:auto!important}
+.focus-active #settings{z-index:103}
+.focus-active #settings button,.focus-active #settings a,.focus-active #settings input,.focus-active #settings select{pointer-events:auto!important}
+.focus-active #focusToggle,.focus-active #focusMusic,.focus-active #systemClock{pointer-events:auto!important}
+.focus-active.focus-secret #companions,.focus-active.focus-secret #companionTools{visibility:visible!important;z-index:102}
+.focus-active.focus-secret #companions button,.focus-active.focus-secret #companionTools button{pointer-events:auto!important}
+.focus-active:not(.focus-secret) #companions,.focus-active:not(.focus-secret) #companionTools{visibility:hidden!important}
+#focusShield{pointer-events:none}
+#focusMusic,#untimedFocus{font-size:11px;color:var(--muted);padding:7px 0}
+#untimedFocus{display:block;width:100%;margin-top:12px}
+#focusToggle{border:1px solid #fff9b02b;border-radius:15px;padding:7px 16px;font-size:12px}
+#onlineMonitor{position:absolute;left:260px;top:480px;width:116px;height:82px;transform-origin:0 0;transform:matrix(.82,-.79,.38,.85,0,0);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:8px 5px;background:linear-gradient(120deg,#063543ee,#075366e0);border:1px solid #72d3db70;color:#b8eff1;box-shadow:inset 0 0 12px #4fa8c72b;font-size:11px;text-align:center;pointer-events:none;text-shadow:0 0 4px #3ee8fb50}
+.online-label{font-size:5px;letter-spacing:1.2px;opacity:.6}
+#onlineMonitor{left:255px;top:509px;width:92px;height:65px;font-size:11px;gap:4px;padding:5px}
+#onlineCount{line-height:1.6;text-wrap:balance}
+#onlineMonitor i{display:block;height:2px;width:70%;margin:0 auto;background:linear-gradient(90deg,#59cddd88,transparent)}
+/* Native petting hand from the simpler interaction version. */
+.pet-hit,.companion-body,#ahogeHit{cursor:grab}
+.pet-hit[data-state=petting],.companion.dragging .companion-body{cursor:grabbing}
+/* User-provided lightning tuft; keep pixels and alpha, only align the layer. */
+#ahogeSprite{inset:auto;left:12px;top:20px;width:55px;height:55px;clip-path:none;transform-origin:27px 38px}
+@media(max-aspect-ratio:4/3){#utilityDock{width:260px}#focusToggle,#focusMusic{font-size:17px}#systemTime{font-size:32px}}

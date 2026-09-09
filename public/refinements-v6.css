@@ -1,0 +1,28 @@
+/* Every character is rendered from its named region, preserving aspect ratio and full hair tips. */
+.companion-art{background:none!important;overflow:visible}
+.companion-art svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}
+.pet-bubble{white-space:normal!important;line-height:1.65;max-height:45vh;overflow-y:auto;scrollbar-width:thin;z-index:2;text-align:left}
+.companion[data-character="33"] .pet-bubble{left:50%;right:auto;transform:translateX(-50%)}
+.todo-fixed li{display:flex;align-items:center;gap:8px;font-size:13px;padding:6px;background:linear-gradient(90deg,#111b10c9,#15211080);margin:4px 0;border-radius:4px}
+.todo-check,.todo-row input[type=checkbox]{appearance:none;display:inline-block;position:relative;width:17px;height:17px;flex:none;border:1px solid #758362;border-radius:4px;background:#46553a;box-shadow:inset 0 1px 2px #ffffff0b;margin:0}
+.todo-check.checked,.todo-row input[type=checkbox]:checked{background:#748561;border-color:#9aab7f}
+.todo-check.checked:after,.todo-row input[type=checkbox]:checked:after{content:'';position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid #f1efc1;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.todo-row input[type=checkbox]:focus-visible{outline:2px solid #d9ddb0;outline-offset:3px}
+.todo-group{margin-bottom:20px}.todo-fixed ul{margin:9px 0}.todo-group h2{font-size:21px}
+#todoPanel{max-height:calc(100dvh - 260px)}
+#chillBody img{animation:none!important;transform:var(--chill-soft,none)!important;transform-origin:50% 100%;will-change:auto}
+#chillHead span,.chill-pet-glow{display:none}.is-petted .chill-word{font-size:15px;letter-spacing:1.5px}
+@media(max-width:650px){.todo-group h2{font-size:17px}#todoPanel{max-height:calc(100dvh - 260px)}.todo-fixed li{font-size:12px}}
+
+/* SIFT/RANSAC calibration: see resources/registration-v11.json. Transform image inside fixed scene mask. */
+#roomStill{display:none}
+#todoRepair{display:block;position:absolute;left:0;top:0;width:510px;height:335px;background:none;pointer-events:none;mask:url('assets/todo-plate-mask-v12.svg') 0 0/510px 335px no-repeat;-webkit-mask:url('assets/todo-plate-mask-v12.svg') 0 0/510px 335px no-repeat}
+#todoRepair::before{content:'';position:absolute;left:0;top:0;width:1920px;height:1080px;background:url('assets/todo-board-v10.png') 0 0/1920px 1080px no-repeat;transform-origin:0 0;transform:matrix3d(0.982924777345,-0.000502085860,0.000000000000,-0.000001189174,-0.000644374653,0.982926228895,0.000000000000,-0.000002317053,0.000000000000,0.000000000000,1.000000000000,0.000000000000,14.744391189232,8.656167104205,0.000000000000,1.000000000000)}
+#focusPresence{position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:6;color:var(--cream);font-size:13px;letter-spacing:1px;padding:8px 15px;background:#131b12b8;border:1px solid #fff9b026;border-radius:20px;pointer-events:none;max-width:calc(100% - 180px);text-align:center}
+@media(max-width:650px){#focusPresence{top:13px;max-width:calc(100% - 170px);font-size:11px;padding:6px 9px;letter-spacing:0}}
+
+
+#focusRecordPanel{border-top:1px solid #fff9b026;padding-top:14px;color:var(--muted);font-size:13px}#focusRecordPanel div{display:flex;justify-content:space-between;margin:8px 0}#focusRecordPanel time{color:var(--cream);font-variant-numeric:tabular-nums}#focusRecordStatus{display:block;margin-top:10px;font-size:11px;opacity:.8}
+
+/* User cover 20260908: SIFT/RANSAC, median alignment 0.764px. */
+#todoRepair::before{background-image:url("assets/todo-cover-20260908.png");transform:matrix3d(0.984594901929,0.002496121277,0.000000000000,0.000003767723,-0.001495782858,0.983778368057,0.000000000000,-0.000006728221,0.000000000000,0.000000000000,1.000000000000,0.000000000000,14.795441560676,7.097785863156,0.000000000000,1.000000000000);}

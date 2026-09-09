@@ -1,0 +1,13 @@
+{
+  "name": "2233-chill-room",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node scripts/check-public.cjs",
+    "check:public": "node scripts/check-public.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

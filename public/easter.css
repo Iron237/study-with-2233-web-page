@@ -1,0 +1,38 @@
+/* Credits live in the settings panel; the clock retains the quiet UI typography. */
+.settings-credits{display:grid;grid-template-columns:1fr;gap:9px;align-items:start;margin-top:22px;padding-top:18px;border-top:1px solid #fff9b021;color:var(--muted);font-size:12px;line-height:22px;white-space:nowrap}
+.settings-credits a{color:var(--cream)}.credit-divider{margin:0 5px;opacity:.5}
+#systemClock{padding:0;border-radius:4px;cursor:default;background:transparent;opacity:1}
+#systemClock:hover,#systemClock:active{background:transparent}
+#systemClock.secret-minute{cursor:pointer;animation:secret-blue 1.8s ease-in-out infinite}
+@keyframes secret-blue{0%,100%{color:#75bfff;text-shadow:0 0 5px #67b6f52e}50%{color:#b1e5ff;text-shadow:0 0 15px #56b6ffa0}}
+.plush-background,.plush-sprite{position:absolute;inset:0;width:140px;height:104px;pointer-events:none}
+.plush-background{mask-image:linear-gradient(transparent,#000 10%,#000 90%,transparent),linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-composite:intersect;-webkit-mask-image:linear-gradient(transparent,#000 10%,#000 90%,transparent),linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-composite:source-in}
+.plush-sprite-22{transform-origin:42px 85px}.plush-sprite-33{transform-origin:88px 74px;clip-path:inset(0 15% 0 43%)}
+.pet-hit{z-index:2}
+#companions{position:absolute;inset:0;pointer-events:none;z-index:6}
+.companion{position:absolute;width:128px;height:168px;pointer-events:none}
+.companion-body{display:block;position:absolute;inset:0;width:128px;height:168px;padding:0;background:transparent!important;pointer-events:auto;touch-action:none;cursor:url('assets/pet-hand.svg') 19 8,grab;transform-origin:center bottom}
+.companion-art{display:block;width:100%;height:100%;background-image:url('assets/pets-concert.png');background-repeat:no-repeat;background-size:200% 100%;background-position:0 0;filter:drop-shadow(0 4px 5px #0006);transform-origin:50% 85%;animation:pet-breathe 3.5s ease-in-out infinite}
+[data-character="33"] .companion-art{background-position:100% 0;animation-delay:-1.7s}
+[data-pose="dance"] .companion-art{background-image:url('assets/pets-dance.png')}
+[data-pose="chill"] .companion-art{background-image:url('assets/pets-chill.png')}
+.companion.dragging .companion-body{cursor:url('assets/pet-hand-press.svg') 20 12,grabbing}
+.companion.dragging .companion-art{animation:none;transform:rotate(var(--lean,0deg)) scale(1.06,.94)}
+.companion-body:hover .companion-art{filter:drop-shadow(0 4px 6px #98cfff60)}
+@keyframes pet-breathe{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-3px) rotate(1deg)}}
+.pet-bubble{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);background:#171d17ef;border:1px solid #fff9b034;border-radius:13px 13px 13px 3px;padding:9px 12px;max-width:220px;white-space:nowrap;color:var(--cream);font-size:12px;line-height:18px}
+#utilityDock{gap:9px}
+.companion-tools{display:flex;align-items:center;justify-content:center;gap:5px;font-size:11px;color:var(--muted);background:linear-gradient(135deg,#20251ce8,#111a13ef);border:1px solid #fff9b02c;border-radius:16px;padding:3px 7px;box-shadow:0 4px 15px #0002}
+.companion-tools>span{opacity:.3;font-size:10px}.companion-tools button{font-size:11px;padding:7px 9px;border-radius:11px;letter-spacing:.4px}.companion-tools button:hover{background:#fff9b010;color:var(--cream)}
+.room-paused .companion-art,.room-paused .secret-minute{animation-play-state:paused}
+#ahogeLayer{position:absolute;left:1330px;top:480px;width:120px;height:100px;pointer-events:none}
+.ahoge-background,#ahogeSprite{position:absolute;inset:0;width:120px;height:100px;pointer-events:none}
+.ahoge-background{mask-image:radial-gradient(ellipse 29px 33px at 41px 44px,#000 76%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 29px 33px at 41px 44px,#000 76%,transparent 100%)}
+#ahogeSprite{transform-origin:39px 58px;clip-path:path('M 53 28 Q 48 35 44 43 L 43 47 L 49 53 L 39 62 L 36 57 L 30 52 Q 27 48 35 40 Q 44 32 53 28 Z')}
+#ahogeHit{position:absolute;left:22px;top:22px;width:38px;height:42px;border-radius:45%;padding:0;background:transparent!important;pointer-events:auto;touch-action:none;cursor:url('assets/pet-hand.svg') 19 8,grab}
+#ahogeHit:focus-visible{outline:1px dashed #fff9b080;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.companion-art{animation:none!important}#systemClock.secret-minute{animation:none;color:#88ceff;text-shadow:0 0 7px #56b6ff66}}
+
+/* Move the composited sprite without relaying out its contents on every pointer event. */
+.companion{left:0;top:0}
+.companion.dragging{will-change:translate}

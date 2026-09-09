@@ -1,0 +1,42 @@
+#stage{inset:0;width:100vw;height:100dvh;transform:none}
+#stage:after{content:'';position:absolute;left:0;right:0;bottom:0;height:260px;background:linear-gradient(transparent,#080c0870);pointer-events:none;z-index:0}
+#player,#album,#utilityDock{z-index:2}
+#scene{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;pointer-events:none}
+#scene button{pointer-events:auto}
+#player{left:50%;bottom:24px;width:min(1136px,calc(100% - 340px));transform:translateX(-50%) scale(var(--ui-scale));transform-origin:bottom center}
+#album{top:64px;right:22px}
+#fullscreenToggle{position:absolute;top:max(14px,env(safe-area-inset-top));right:max(22px,env(safe-area-inset-right));z-index:110;width:36px;height:36px;border:1px solid #fff9b044;background:#161b14ba;color:var(--cream);font-size:25px;line-height:1;padding:4px}
+.focus-active #player,.focus-active #album{visibility:visible!important}
+.focus-active #fullscreenToggle{visibility:visible!important;pointer-events:auto!important}
+.focus-active #player,.focus-active #album{cursor:default}
+.focus-active #player button,.focus-active #player input,.focus-active #player a,.focus-active #album button{pointer-events:auto!important}
+.focus-active #playlist{visibility:visible!important}.focus-active #playlist button{pointer-events:auto!important}
+#focusMusic{display:none}
+#utilityDock{right:22px;bottom:24px;width:240px}
+#playlist{left:max(20px,calc(50% - 568px));bottom:180px;width:min(590px,calc(100% - 40px));max-height:calc(100% - 220px)}
+#settings,#focusPanel{right:22px;bottom:132px;width:min(390px,calc(100% - 44px));max-height:calc(100% - 158px);overflow:auto}
+#trackList{max-height:40vh}.panel{padding:20px}
+.focus-badge{left:22px;bottom:25px;transform:none;align-items:flex-start}
+#notice{bottom:175px;max-width:calc(100% - 32px);text-align:center}
+.pet-bubble{white-space:normal;width:max-content;max-width:190px;text-wrap:balance}
+.meme-card>img{max-width:min(640px,calc(100vw - 60px));max-height:calc(100dvh - 120px)}
+@media(max-width:1500px){#player{left:24px;width:calc(100% - 315px);transform:scale(var(--ui-scale));transform-origin:left bottom}#trackTitle{font-size:20px;max-width:100%}#trackArtist{font-size:14px}.track-info{min-width:0;flex:1}.track-details{max-width:100%}.transport{gap:3px}.transport button{padding:6px}.volume-group{margin-right:0}#volume{width:64px}.focus-badge{bottom:154px}}
+@media(max-width:1050px){.player-main{display:block}.track-info{margin-bottom:12px}.transport{justify-content:flex-end}.time-row{font-size:15px}#player{width:calc(100% - 280px)}#utilityDock{width:220px}#album{width:250px;height:119px}#albumTime{font-size:28px;line-height:32px}.album-inner{inset:14px 26px}.album-meta{font-size:10px}.album-controls{margin-top:0}.focus-badge{bottom:196px}}
+@media(max-width:650px){#player{left:16px;bottom:max(16px,env(safe-area-inset-bottom));width:calc(100% - 32px);transform:none!important}.player-main{display:block}.track-info{margin-bottom:6px}#trackTitle{font-size:17px}#trackArtist{font-size:12px}.track-kicker{font-size:8px}.transport{justify-content:space-between;gap:2px}.transport svg{width:20px;height:20px}#volume{width:55px}.volume-group{gap:0}#utilityDock{right:16px;bottom:184px;width:230px;gap:5px}#utilityDock #systemTime{font-size:21px;line-height:25px}#focusToggle{font-size:12px;padding:7px 13px}#album{top:56px;right:16px;width:220px;height:105px}.album-inner{inset:9px 20px}#albumTime{font-size:26px;line-height:30px}.eyebrow{font-size:10px}.album-controls svg{width:12px;height:12px}.album-controls button{padding:3px 7px}#fullscreenToggle{right:16px;top:12px}#playlist{left:16px;bottom:183px;width:calc(100% - 32px);max-height:calc(100dvh - 205px)}#settings,#focusPanel{right:16px;bottom:184px;width:calc(100% - 32px);max-height:calc(100dvh - 210px)}.panel label{margin:14px 0}.panel h1{font-size:19px}.panel{padding:18px}.focus-badge{left:18px;bottom:187px}.focus-badge time{font-size:22px}#notice{bottom:190px}.pet-bubble{max-width:150px;font-size:11px}.companion-tools button{padding:6px}.settings-credits{margin-top:15px;padding-top:12px}}
+@media(max-height:520px) and (min-width:651px){#album{top:48px;transform:scale(.8);transform-origin:top right}#utilityDock{bottom:10px;gap:2px}#player{bottom:10px}.track-info{margin-bottom:3px}#settings,#focusPanel{bottom:70px;max-height:calc(100% - 85px)}.focus-badge{bottom:160px}.companion{transform:scale(.75);transform-origin:bottom right}}
+
+/* HUD uses logical pixels; scene overlays retain their own cover transform. */
+#hud{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none;z-index:1}
+#hud>*{pointer-events:auto}
+#hud #companions,#hud #focusShield,#hud #focusPresence{pointer-events:none}
+#hud #todoPanel{max-height:calc(100% - 260px)}
+#hud #trackList{max-height:420px}
+
+/* The session timer travels with the clock, including HUD scale and taskbar inset. */
+#utilityDock #focusShield{position:relative;inset:auto;width:100%;z-index:auto;pointer-events:none}
+#utilityDock .focus-badge{position:static;inset:auto;transform:none;align-items:flex-end;gap:0;letter-spacing:1px}
+#utilityDock .focus-badge time{font-size:24px;line-height:1.25}
+@media(max-width:650px){#utilityDock .focus-badge time{font-size:21px}}
+
+#utilityDock .focus-badge{gap:5px}
+#utilityDock .focus-badge .clock-label{color:#e8e3b1}

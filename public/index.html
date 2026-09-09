@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2233 · 陪你一起自习</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="easter.css">
+  <link rel="stylesheet" href="focus-tv.css">
+  <link rel="stylesheet" href="website.css"><link rel="stylesheet" href="responsive.css">
+  <script src="focus-records.js" defer></script><script src="online.js" defer></script>
+  <script src="tracks.js"></script><script src="media-config.js"></script><script src="media.js"></script><script src="dialogue.js"></script>
+  <script src="player-core.js"></script>
+  <script src="easter-core.js"></script>
+  <script src="focus-core.js"></script>
+  <script src="layout.js" defer></script><script src="app.js" defer></script>
+  <script src="petting.js" defer></script>
+  <script src="easter.js" defer></script>
+  <script src="ahoge.js" defer></script>
+  <script src="focus-tv.js" defer></script>
+  <link rel="stylesheet" href="interactions-v5.css"><link rel="stylesheet" href="refinements-v6.css">
+  <script src="pet-content.js"></script><script src="conversation-core.js"></script><script src="dialogue-scenes.js"></script><script src="media-resources.js"></script><script src="recommendations-core.js"></script>
+  <script src="todo-core.js"></script><script src="todo.js" defer></script><script src="chill-petting.js" defer></script>
+</head>
+<body>
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5v14M17 5v14" stroke-width="4"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M5 5v14"/><path d="m19 5-11 7 11 7Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M19 5v14"/><path d="m5 5 11 7-11 7Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path d="M16 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/></symbol>
+    <symbol id="i-muted" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4Zm13 0 5 6m0-6-5 6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.1M3 12h.1M3 18h.1"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4m14-1v2a3 3 0 0 1-3 3H3"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 6h3c4 0 8 12 12 12h3M3 18h3c4 0 8-12 12-12h3m-4-4 4 4-4 4m0 4 4 4-4 4"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 0 6M4 3v6h6"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16M8 3v6m8 0v6m-5 0v6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  </defs></svg>
+  <main id="stage" aria-label="2233 自习室"><button id="fullscreenToggle" aria-label="进入全屏" title="进入全屏" aria-pressed="false">⛶</button>
+    <video id="background" muted autoplay loop playsinline preload="auto" poster="assets/background-poster.jpg" aria-hidden="true"></video>
+    <div id="roomStill" aria-hidden="true"></div><div id="todoRepair" aria-hidden="true"></div>
+    <button id="todoToggle" aria-label="显示或收起待办" aria-expanded="true">今日待办</button>
+    <aside id="todoPanel" aria-label="今日待办">
+      <section class="todo-group todo-fixed"><header><h2>22今日待办:</h2></header><ul><li><span class="todo-check checked" aria-label="已完成"></span>整理今日稿件并归档</li><li><span class="todo-check" aria-label="未完成"></span>完成活动脚本方案</li></ul></section>
+      <section class="todo-group todo-fixed"><header><h2>33今日待办:</h2></header><ul><li><span class="todo-check checked" aria-label="已完成"></span>找到并修复系统BUG</li><li><span class="todo-check" aria-label="未完成"></span>分析最新网络趋势</li></ul></section>
+      <section class="todo-group"><header><h2>你的今日待办</h2><span data-todo-count="you">0/0</span><button data-todo-add="you" aria-label="添加你的待办" title="添加待办">＋</button></header><ul data-todo-list="you"></ul><form data-todo-form="you" hidden><input aria-label="你的新待办" placeholder="接下来想做什么？" maxlength="80" required><button type="submit">添加</button></form></section>
+      <small id="todoStatus" role="status"></small>
+    </aside>
+    <div id="focusPresence" aria-label="专注伙伴"><span id="onlineCount" role="status">正在寻找自习伙伴…</span></div>
+    <div id="plushies" aria-label="窗边的 22 和 33 玩偶">
+      <img class="plush-background" src="assets/plush-background.png" alt="" aria-hidden="true">
+      <img class="plush-sprite plush-sprite-22" src="assets/plush-22.png" alt="" aria-hidden="true">
+      <img class="plush-sprite plush-sprite-33" src="assets/plush-33-v9.png" alt="" aria-hidden="true">
+      <button class="pet-hit pet-22" aria-label="摸摸 22 玩偶" title="按住轻轻揉一揉" data-state="idle"></button>
+      <button class="pet-hit pet-33" aria-label="摸摸 33 玩偶" title="按住轻轻揉一揉" data-state="idle"></button>
+    </div>
+    <div id="ahogeLayer" aria-label="22 的呆毛">
+      <img class="ahoge-background" src="assets/ahoge-background.png" alt="" aria-hidden="true">
+      <img id="ahogeSprite" src="assets/ahoge-user.png" alt="" aria-hidden="true">
+      <button id="ahogeHit" aria-label="轻碰 22 的呆毛" title="轻轻碰一下呆毛" data-state="idle"></button>
+    </div>
+    <section id="album" class="interface" aria-label="整张歌单">
+      <svg id="albumSeek" viewBox="0 0 300 142" role="slider" tabindex="0" aria-label="歌单总进度" aria-valuemin="0" aria-valuemax="2070" aria-valuenow="0">
+        <path class="ring-base" d="M150 8 H229 A63 63 0 0 1 229 134 H71 A63 63 0 0 1 71 8 H150"/>
+        <path id="ringProgress" class="ring-progress" pathLength="1" d="M150 8 H229 A63 63 0 0 1 229 134 H71 A63 63 0 0 1 71 8 H150"/>
+        <path id="ringHit" class="ring-hit" d="M150 8 H229 A63 63 0 0 1 229 134 H71 A63 63 0 0 1 71 8 H150"/>
+      </svg>
+      <div class="album-inner">
+        <div class="eyebrow">歌单进度 <span id="albumCount">01 / 08</span></div>
+        <div id="albumTime">00:00</div>
+        <div class="album-meta">共 <span id="albumDuration">34:30</span> <span class="dot">·</span> <span id="albumPercent">0%</span></div>
+        <div class="album-controls">
+          <button id="reset" title="返回歌单开头并暂停" aria-label="返回歌单开头"><svg><use href="#i-reset"/></svg></button>
+          <button class="play-toggle" aria-label="播放"><svg><use href="#i-play"/></svg></button>
+          <button class="next" aria-label="下一首"><svg><use href="#i-next"/></svg></button>
+        </div>
+      </div>
+      <div id="albumHint" class="hint" hidden></div>
+    </section>
+    <section id="player" class="interface" aria-label="音乐播放器">
+      <div class="player-main">
+        <div class="track-info">
+          <span class="track-kicker"><a id="bilibiliHome" href="https://www.bilibili.com/" target="_blank" rel="noopener noreferrer" aria-label="打开哔哩哔哩首页">BILIBILI</a> LOFI <span id="trackNumber">01 / 08</span></span>
+          <button id="openPlaylist" class="track-details" aria-label="打开歌单" aria-expanded="false">
+            <span id="trackTitle">流★群 Meteor Stream【chill ver.】</span>
+            <span id="trackArtist">原曲作者：H.K.君</span>
+          </button>
+        </div>
+        <div class="transport">
+          <div class="volume-group">
+            <button id="mute" aria-label="静音" aria-pressed="false"><svg><use href="#i-volume"/></svg></button>
+            <input id="volume" type="range" min="0" max="100" step="1" value="35" aria-label="音量">
+          </div>
+          <button id="previous" aria-label="上一首" title="上一首"><svg><use href="#i-prev"/></svg></button>
+          <button class="play-toggle play-main" aria-label="播放" title="播放 / 暂停"><svg><use href="#i-play"/></svg></button>
+          <button class="next" aria-label="下一首" title="下一首"><svg><use href="#i-next"/></svg></button>
+          <button id="mode" aria-label="播放模式：列表循环" title="列表循环"><svg><use href="#i-repeat"/></svg><span id="repeatOne" hidden>1</span></button>
+          <button id="listToggle" aria-label="显示歌单" title="歌单"><svg><use href="#i-list"/></svg></button>
+        </div>
+      </div>
+      <div class="seek-wrap"><input id="trackSeek" type="range" min="0" max="279" step="0.01" value="0" aria-label="当前歌曲进度"><output id="trackHint" class="hint" hidden></output></div>
+      <div class="time-row"><time id="trackTime">00:00</time><span id="playbackState">等你按下播放</span><time id="trackDuration">04:39</time></div>
+    </section>
+    <aside id="playlist" class="panel" aria-label="歌单" hidden>
+      <header><div><span class="eyebrow">Main goal: stay chill</span><h1>2233 陪你一起自习</h1></div><button id="closePlaylist" aria-label="关闭歌单"><svg><use href="#i-close"/></svg></button></header>
+      <div class="playlist-note">8 首熟悉的旋律 · Lofi / Chill · <a href="https://music.163.com/djradio?id=1498085019" target="_blank" rel="noopener noreferrer">网易云播客 ↗</a></div>
+      <ol id="trackList"></ol>
+      <footer>点击曲目开始播放 · 拖动右上角边框可跨曲跳转</footer>
+    </aside>
+    <aside id="settings" class="panel" aria-label="自习室设置" hidden>
+      <header><h1>自习室设置</h1><button id="closeSettings" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button></header>
+      <label>背景画质<select id="quality"><option value="auto">自动 · 推荐</option><option value="720">720p · 省流</option><option value="1920">1080p · 清晰</option><option value="3840">4K · 原始分辨率</option></select></label>
+      <label>界面适配分辨率<select id="layoutResolution"><option value="auto">自动适配</option><option value="1280x720">1280×720</option><option value="1920x1080">1920×1080</option><option value="2560x1440">2560×1440</option><option value="3440x1440">3440×1440（宽屏）</option><option value="3840x2160">3840×2160</option><option value="5120x1440">5120×1440（超宽屏）</option><option value="7680x4320">7680×4320</option></select></label>
+      <label>播放器大小<select id="uiScale"><option value="0.85">小</option><option value="1" selected>标准</option><option value="1.15">大</option></select></label>
+      <label>播放控制<input id="showControls" type="checkbox" checked></label>
+      <label>背景动画<input id="animate" type="checkbox" checked></label>
+      <label>系统时间<input id="showClock" type="checkbox" checked></label>
+      <label>下次启动自动播放<input id="autoplaySetting" type="checkbox"></label>
+
+      <section id="focusRecordPanel" aria-label="我的专注记录"><div>今日专注 <time id="focusToday">--:--</time></div><div>累计专注 <time id="focusTotal">--:--</time></div><small id="focusRecordStatus" role="status">正在读取记录…</small></section>
+      <nav class="settings-credits" aria-label="相关主页">
+        <span><a href="https://space.bilibili.com/68559" target="_blank" rel="noopener noreferrer">22和33</a>主页</span>
+        <span>作者主页 <span class="credit-divider">|</span> <a href="https://space.bilibili.com/67981936" target="_blank" rel="noopener noreferrer">Iron-God</a></span>
+        <span><a href="feedback.html" target="_blank" rel="noopener noreferrer">bug反馈/功能建议</a></span>
+      </nav>
+    </aside>
+    <div id="utilityDock">
+      <div id="focusShield" hidden><div class="focus-badge"><span class="clock-label">FOCUS TIME</span><time id="focusRemaining"></time></div></div>
+      <button id="systemClock" aria-label="系统时间" disabled>
+        <span class="clock-label">LOCAL TIME</span>
+        <time id="systemTime"></time>
+      </button>
+      <div id="companionTools" class="companion-tools" hidden><button id="petPose" aria-label="切换桌宠动作">换姿势</button><span aria-hidden="true">·</span><button id="petChat" aria-label="和桌宠聊两句">聊两句</button><span aria-hidden="true">·</span><button id="petDismiss" aria-label="收起桌宠">收起</button></div>
+      <button id="focusMusic">播放音乐</button>
+      <button id="focusToggle" aria-label="休息">休息</button>
+      <button id="settingsToggle" aria-label="打开设置" title="设置"><svg><use href="#i-settings"/></svg></button>
+    </div>
+    <section id="companions" aria-label="22 和 33 桌宠" hidden>
+      <div class="companion" data-character="22">
+        <span class="pet-bubble" role="status" hidden></span>
+        <button class="companion-body" aria-label="摸摸或拖动 22" title="拖动带我走 · 点击摸摸"><span class="companion-art"></span></button>
+      </div>
+      <div class="companion" data-character="33">
+        <span class="pet-bubble" role="status" hidden></span>
+        <button class="companion-body" aria-label="摸摸或拖动 33" title="拖动带我走 · 点击摸摸"><span class="companion-art"></span></button>
+      </div>
+    </section>
+    <aside id="focusPanel" class="panel" aria-label="专注模式" hidden>
+      <header><div><span class="eyebrow">LOCK ON.</span><h1>专注开始</h1></div><button id="closeFocus" aria-label="关闭专注设置">×</button></header>
+      <div class="focus-presets"><button data-minutes="25">25 分钟</button><button data-minutes="45">45 分钟</button><button data-minutes="60">60 分钟</button></div>
+      <label>专注时长（分钟）<input id="focusMinutes" aria-label="专注时长（分钟）" type="number" min="1" max="180" step="1" value="25"></label>
+
+      <button id="startFocus">开始计时专注</button><button id="untimedFocus">保持专注，不限时</button>
+    </aside>
+    <button id="sceneClockHit" aria-label="闹钟表情彩蛋" title="等小电视露出这个表情……" disabled></button>
+    <div id="chillVisitor" hidden><span class="chill-word">chill~</span><div id="chillBody"><img src="assets/chill-visitor.png" alt="电视头 Chill 站在书架前"><span class="chill-pet-glow" aria-hidden="true"></span></div><button id="chillHead" aria-label="摸摸 Chill 的头" title="轻轻摸摸头"><span aria-hidden="true">♡</span></button><button id="dismissChill" aria-label="收起 Chill">×</button></div>
+
+    <div id="notice" role="status" hidden></div>
+  </main>
+  <audio id="music" preload="metadata"></audio>
+</body>
+</html>

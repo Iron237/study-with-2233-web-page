@@ -1,0 +1,1 @@
+fetch('feedback-config.json').then(r=>r.json()).then(c=>{if(typeof c.email==='string'&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){const a=document.getElementById('feedbackEmail');a.href='mailto:'+c.email;document.getElementById('emailLabel').textContent=c.email;a.hidden=false;}}).catch(()=>{});
