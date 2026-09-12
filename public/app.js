@@ -57,7 +57,7 @@ function render() {
   $('mode').setAttribute('aria-label','播放模式：'+modeNames[player.mode]); $('mode').title=modeNames[player.mode];
   $('mode').querySelector('use').setAttribute('href',player.mode==='shuffle'?'#i-shuffle':'#i-repeat');
   $('repeatOne').hidden=player.mode!=='one';
-  $('playbackState').textContent=player.error||(player.enginePaused?'播放已暂停':player.wantsPlayback?(player.pending!==null?'正在加载…':modeNames[player.mode]):'已暂停 · 动画继续');
+  $('playbackState').textContent=player.error||(player.enginePaused?'播放已暂停':player.wantsPlayback?(player.pending!==null?'正在加载…':modeNames[player.mode]):'');
   if(player.error){if($('notice').textContent!==player.error)showNotice(player.error);$('notice').dataset.playbackError=player.error;}
   else if($('notice').dataset.playbackError){if($('notice').textContent===$('notice').dataset.playbackError)showNotice('');delete $('notice').dataset.playbackError;}
 }

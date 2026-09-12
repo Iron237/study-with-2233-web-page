@@ -16,6 +16,7 @@
     return '['+label.replace(/[\[\]\r\n]/g,' ')+']('+url+')';
   }
   function values(scene,record,date=new Date()){
+    if(scene==='rest')return {time:String(date.getHours()).padStart(2,'0')+':'+String(date.getMinutes()).padStart(2,'0')};
     if(!record)return {};
     if(scene==='sing')return {song_title:record.title,song_artist:record.artist,song_bvid:linked(record.bvid,record.url),song_url:record.url,song_link:linked(record.title+' · 原曲',record.url)};
     if(scene==='show'){

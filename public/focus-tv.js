@@ -23,7 +23,7 @@
     window.roomEaster?.stopConversation();active=false;timer.session=null;remember();setLocked(false);$('focusMusic').hidden=true;
     $('focusToggle').textContent='继续专注';$('focusToggle').setAttribute('aria-label','继续专注');
     stage.classList.remove('focus-secret');stage.classList.remove('focus-active');$('focusShield').hidden=true;
-    player.mode=session?.mode||'list';interactivePaused(false);render();save();window.dispatchEvent(new Event('room-focus-change'));
+    player.mode=session?.mode||'list';if(!celebrate||!session)window.roomEaster?.showRest();interactivePaused(false);render();save();window.dispatchEvent(new Event('room-focus-change'));
     if(celebrate&&session)window.roomEaster?.showFocusComplete(session.minutes);
   }
   function updateCountdown(){
@@ -74,14 +74,16 @@
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){$('settings').hidden=true;if(!active)$('focusPanel').hidden=true;}
   });
-  try{const saved=JSON.parse(localStorage.getItem(key)||'null');timer.restore(saved?.state==='focus'?saved.session:saved,now());}catch(_){}
+  let restoredRest=false;
+  try{const saved=JSON.parse(localStorage.getItem(key)||'null');restoredRest=saved?.state==='rest';if(!restoredRest)timer.restore(saved?.state==='focus'?saved.session:saved,now());}catch(_){}
+  if(restoredRest)finish(null,false);
   let restoredFinished=false;
   if(timer.session){
     const finished=timer.takeFinished(now());
     if(finished){finish(finished);restoredFinished=true;}
     else{player.mode='list';lock();}
   }
-  if(!timer.session&&!active&&!restoredFinished){timer.startUnlimited(now(),player.mode);player.mode='list';lock();remember();}
+  if(!timer.session&&!active&&!restoredFinished&&!restoredRest){timer.startUnlimited(now(),player.mode);player.mode='list';lock();remember();}
   setInterval(()=>{if(active)remember();},5000);
   window.addEventListener('pagehide',remember);
   window.addEventListener('pageshow',e=>{if(e.persisted&&active){try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved?.state==='focus')timer.restore(saved.session,now());else finish(timer.session,false);}catch(_){}updateCountdown();}});
